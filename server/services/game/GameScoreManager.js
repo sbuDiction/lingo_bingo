@@ -1,5 +1,10 @@
 module.exports = (pool) => {
 
+    const getHighestScores = async () => {
+        const res = await pool.query('select users.firstname, users.lastname, users.username, scores.score from scores inner join users on users.id = scores.users_id order by score desc');
+        return res.rows;
+    }
+
     const addScore = async (account) => {
         const res = await pool.query('select * from scores where users_id = $1', [account.id]);
         if (res.rows.length !== 1) {
@@ -13,6 +18,7 @@ module.exports = (pool) => {
     }
 
     return {
+        getHighestScores,
         addScore
     }
 }

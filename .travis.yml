@@ -10,7 +10,7 @@ services:
 
 before_script:
   - psql -c 'create database  lingo_bingo_db_test;' -U postgres
-  - psql -U postgres -d e_smart_test -a -f table.sql
+  - psql -U postgres -d lingo_bingo_db_test -a -f table.sql
 
 addons:
   apt:

@@ -1,6 +1,6 @@
 const { equal, deepEqual, strict } = require('assert');
 const pg = require('pg');
-const AddHighScore = require('../server/services/game/AddHighScore');
+const GameScoreManager = require('../server/services/game/GameScoreManager');
 const FindAccount = require('../server/services/account/FindAccount');
 
 const { Pool } = pg;
@@ -14,7 +14,7 @@ describe("Testing the lingo bingo scores functionality", () => {
     });
 
     it('Should return "Jason Gama" new added game score status', async () => {
-        const addScoreInstance = AddHighScore(pool);
+        const gameScoreManager = GameScoreManager(pool);
         const findAccount = FindAccount(pool);
         let res = await findAccount.findByUserName('jasonG123');
         const { id } = res.account;
@@ -22,7 +22,7 @@ describe("Testing the lingo bingo scores functionality", () => {
             id: id,
             score: 100
         }
-        const score = await addScoreInstance.addScore(account);
+        const score = await gameScoreManager.addScore(account);
         strict.deepEqual(score, { response: 'Score was added', status: true });
     });
 

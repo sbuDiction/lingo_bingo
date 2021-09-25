@@ -18,7 +18,8 @@ describe("Testing the lingo bingo create account functionality", () => {
             firstName: 'Jason',
             lastName: 'Gama',
             userName: 'jasonG123',
-            email: 'jasongama@gmail.com'
+            email: 'jasongama@gmail.com',
+            password: "sbu123"
         }
         const res = await accountInstance.createAccount(account);
         equal(res.status, true);
@@ -30,7 +31,8 @@ describe("Testing the lingo bingo create account functionality", () => {
             firstName: 'Jason',
             lastName: 'Gama',
             userName: 'jasonG123',
-            email: 'jasongama@gmail.com'
+            email: 'jasongama@gmail.com',
+            password: "sbu123"
         }
 
         const user1 = await accountInstance.createAccount(jason);
@@ -39,7 +41,8 @@ describe("Testing the lingo bingo create account functionality", () => {
             firstName: 'Sibusiso',
             lastName: 'Nkosi',
             userName: 'sbunko123',
-            email: 'sbudiction@gmail.com'
+            email: 'sbudiction@gmail.com',
+            password: "sbu123"
         }
         const user2 = await accountInstance.createAccount(sibusiso);
         equal(user1.status, true);

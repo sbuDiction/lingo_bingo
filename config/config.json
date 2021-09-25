@@ -1,0 +1,6 @@
+{
+    "database": "postgresql://pgadmin:pg123@localhost:5432/longo_bingo_db",
+    "secret": "something sneaky",
+    "tokenLife": "24h",
+    "testing": false
+}

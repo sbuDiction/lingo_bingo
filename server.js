@@ -4,8 +4,11 @@ const app = express();
 const pg = require('pg');
 const Pool = pg.Pool;
 const GameScoreManager = require('./server/services/game/GameScoreManager');
-const ScoreApi = require('./server/api/scoreApi');
+const ScoreApi = require('./api/scoreApi');
 const GameRoutes = require('./routes/Lingo-Bingo-Routes');
+const UserApi = require('./api/userApi');
+const CreateAccount = require('./server/services/account/CreateAccount');
+const FindAccount = require('./server/services/account/FindAccount');
 
 let useSSL = false;
 const local = process.env.LOCAL || false;
@@ -31,10 +34,12 @@ app.get('/', (req, res) => {
     })
 });
 
-
+const createAccount = CreateAccount(pool);
+const findAccount = FindAccount(pool);
 const gameScoreManager = GameScoreManager(pool);
 const scoreApi = ScoreApi(gameScoreManager);
-GameRoutes(app, scoreApi);
+const userApi = UserApi(createAccount, findAccount);
+GameRoutes(app, scoreApi, userApi);
 
 const PORT = process.env.PORT || 3007;
 

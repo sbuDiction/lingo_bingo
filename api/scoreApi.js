@@ -31,8 +31,12 @@ module.exports = (gameScoreManager) => {
     };
 
     const addUserScore = async (req, res) => {
-        let { userId } = req.body;
-        let score = await gameScoreManager.addScore(userId);
+        let { score, userId } = req.body;
+        let userScoreUpdate = {
+            score: score,
+            id: userId
+        }
+        let score = await gameScoreManager.addScore(userScoreUpdate);
         if (score.status) {
             res.json({
                 status: "success",

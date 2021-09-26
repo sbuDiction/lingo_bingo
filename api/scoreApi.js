@@ -36,8 +36,8 @@ module.exports = (gameScoreManager) => {
             score: score,
             id: userId
         }
-        let score = await gameScoreManager.addScore(userScoreUpdate);
-        if (score.status) {
+        let scoreResults = await gameScoreManager.addScore(userScoreUpdate);
+        if (scoreResults.status) {
             res.json({
                 status: "success",
                 reason: score.response

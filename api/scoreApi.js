@@ -28,11 +28,32 @@ module.exports = (gameScoreManager) => {
             scores: userHighestScores,
             status: 'success'
         });
+    };
+
+    const addUserScore = async (req, res) => {
+        let { score, userId } = req.body;
+        let userScoreUpdate = {
+            score: score,
+            id: userId
+        }
+        let score = await gameScoreManager.addScore(userScoreUpdate);
+        if (score.status) {
+            res.json({
+                status: "success",
+                reason: score.response
+            })
+        } else {
+            res.json({
+                status: 'failure'
+            })
+        }
+
     }
 
     return {
         getHighestScores,
         getLeaderBord,
-        getUserHighestScores
+        getUserHighestScores,
+        addUserScore
     }
 }
